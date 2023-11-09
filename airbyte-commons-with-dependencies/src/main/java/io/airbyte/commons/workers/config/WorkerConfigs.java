@@ -25,6 +25,7 @@ public class WorkerConfigs {
   private final Map<String, String> workerKubeAnnotations;
   private final Map<String, String> workerKubeLabels;
   private final List<String> jobImagePullSecrets;
+  private final String jobImageRegistry;
   private final String jobImagePullPolicy;
   private final String sidecarImagePullPolicy;
   private final String jobSocatImage;
@@ -40,6 +41,7 @@ public class WorkerConfigs {
                        final Map<String, String> workerKubeAnnotations,
                        final Map<String, String> workerKubeLabels,
                        final List<String> jobImagePullSecrets,
+                       final String jobImageRegistry,
                        final String jobImagePullPolicy,
                        final String sidecarImagePullPolicy,
                        final String jobSocatImage,
@@ -54,6 +56,7 @@ public class WorkerConfigs {
     this.workerKubeAnnotations = workerKubeAnnotations;
     this.workerKubeLabels = workerKubeLabels;
     this.jobImagePullSecrets = jobImagePullSecrets;
+    this.jobImageRegistry = jobImageRegistry;
     this.jobImagePullPolicy = jobImagePullPolicy;
     this.sidecarImagePullPolicy = sidecarImagePullPolicy;
     this.jobSocatImage = jobSocatImage;
@@ -80,6 +83,7 @@ public class WorkerConfigs {
         configs.getJobKubeAnnotations(),
         configs.getJobKubeLabels(),
         configs.getJobKubeMainContainerImagePullSecrets(),
+        null,
         configs.getJobKubeMainContainerImagePullPolicy(),
         configs.getJobKubeSidecarContainerImagePullPolicy(),
         configs.getJobKubeSocatImage(),
@@ -118,6 +122,10 @@ public class WorkerConfigs {
 
   public List<String> getJobImagePullSecrets() {
     return jobImagePullSecrets;
+  }
+
+  public String getJobImageRegistry() {
+    return jobImageRegistry;
   }
 
   public String getJobImagePullPolicy() {

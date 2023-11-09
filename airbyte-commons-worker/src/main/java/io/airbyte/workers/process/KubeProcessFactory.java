@@ -142,6 +142,9 @@ public class KubeProcessFactory implements ProcessFactory {
           // If we do not have one, use empty uuid.
           new Connection(connectionId != null ? connectionId : UUID_EMPTY));
 
+      final String registry = workerConfigs.getJobImageRegistry();
+      final String image = null == registry || imageName.startsWith(registry) ? imageName : registry + "/" + imageName;
+
       return new KubePodProcess(
           processRunnerHost,
           fabricClient,
@@ -149,7 +152,7 @@ public class KubeProcessFactory implements ProcessFactory {
           namespace,
           serviceAccount,
           schedulerName.isBlank() ? null : schedulerName,
-          imageName,
+          image,
           workerConfigs.getJobImagePullPolicy(),
           workerConfigs.getSidecarImagePullPolicy(),
           stdoutLocalPort,
